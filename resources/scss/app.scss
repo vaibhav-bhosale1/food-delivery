@@ -1,4 +1,5 @@
 @import './variables';
+
 body{
     font-family: "Lato",sans-serif;
     -webkit-font-smoothing:antialiased;
@@ -33,6 +34,9 @@ section.hero{
         border-color: $pure;
         color: $pure;
     }
+    &:focus{
+        outline: none;
+    }
 }
 .btnprimary{
     background: $primary;
@@ -49,6 +53,4 @@ section.cart{
 }
 section.login{
     background: $secondary;
-    min-height: calc(100vh-86px);
-   
 }

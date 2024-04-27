@@ -36,6 +36,9 @@ section.hero {
   border-color: #fff;
   color: #fff;
 }
+.addtocart:focus {
+  outline: none;
+}
 
 .btnprimary {
   background: #FE5F1E;
@@ -43,4 +46,15 @@ section.hero {
 }
 .btnprimary:hover {
   background: #b23301;
+}
+
+section.cart {
+  background: #F8F8F8;
+}
+section.cart .amount {
+  color: #FE5F1E;
+}
+
+section.login {
+  background: #F8F8F8;
 }
