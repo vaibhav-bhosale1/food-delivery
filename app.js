@@ -18,5 +18,16 @@ app.set("views",path.resolve("./resources/views"));
 app.get('/',(req,res)=>{
    res.render("home");
 })
+app.get('/cart',(req,res)=>{
+   res.render('customers/cart')
+})
+app.get('/signin',(req,res)=>{
+   res.render('auth/signin')
+})
+app.get('/signup',(req,res)=>{
+   res.render('auth/signup')
+})
+
+
 
 app.listen(PORT,()=>{console.log(`listening on port:${PORT}`)})
