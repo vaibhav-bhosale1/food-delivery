@@ -11,6 +11,8 @@ function Routers(app){
      app.get('/cart',CartController().cart)
 
      app.post('/update-cart',CartController().update)
+
+     app.post('/signup',SignupController().postsignup)
 }
 
 module.exports=Routers;
