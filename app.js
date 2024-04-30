@@ -9,7 +9,9 @@ const PORT=process.env.PORT || 3000
 const session=require('express-session')
 const flash=require('express-flash')
 const Mongodbstore=require('connect-mongo')
-
+const passport=require('passport')
+const passsportinit=require('./config/passport')
+const googleauth=require('./config/passport')
 //database Connection
 mongoose.connect("mongodb://localhost/pizza").
 then(e=>console.log("mongodb connected"))
@@ -32,6 +34,13 @@ app.use(session(
     }
 ))
 app.use(flash())
+
+
+//-passport
+passsportinit(passport)
+app.use(passport.initialize())
+app.use(passport.session())
+
 
 
 

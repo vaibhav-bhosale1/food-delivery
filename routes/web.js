@@ -13,6 +13,8 @@ function Routers(app){
      app.post('/update-cart',CartController().update)
 
      app.post('/signup',SignupController().postsignup)
+
+     app.post('/signin',SigninController().postsignin)
 }
 
 module.exports=Routers;

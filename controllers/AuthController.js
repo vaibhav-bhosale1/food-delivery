@@ -1,10 +1,27 @@
 const User=require('../models/user')
 const bcrypt=require('bcrypt')
+const passport=require('passport')
 function SigninController(){
     return{
         signin(req,res){
             res.render('auth/signin')
+        },
+        postsignin(req,res,next){
+            passport.authenticate('local',(err,user,info)=>{
+                console.log(user)
+                if(err){
+                    req.flash('error',info.message)
+                    return next(err);
+                }
+                if(!user){
+                    req.flash('error',info.message)
+                    return res.redirect('/signin')
+                }
+                
+                return res.redirect('/')
+            })(req,res,next)
         }
+
     }
 }
 
@@ -31,8 +48,10 @@ function SignupController(){
     
             if (userr) {
                 // User with this email already exists
-                console.log('This email is already taken. Please choose another.');
-                return false;
+                req.flash('error','email already taken');
+                req.flash("name",name);
+                req.flash("email",email)
+                return res.redirect('/signup');
             } 
 
 
@@ -46,7 +65,7 @@ function SignupController(){
 
             user.save().then((user)=>{
                 console.log(user)
-                return res.redirect('/')
+                return res.redirect('/signin')
             }).catch(err=>{
                 req.flash('error','Something went wrong')
                 return res.redirect('/signup')
