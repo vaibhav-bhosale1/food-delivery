@@ -7,8 +7,9 @@ function SigninController(){
             res.render('auth/signin')
         },
         postsignin(req,res,next){
-            passport.authenticate('local',(err,user,info)=>{
+            passport.authenticate('local',{session:false},(err,user,info)=>{
                 console.log(user)
+                
                 if(err){
                     req.flash('error',info.message)
                     return next(err);
@@ -17,11 +18,18 @@ function SigninController(){
                     req.flash('error',info.message)
                     return res.redirect('/signin')
                 }
+                req.logIn(user,(err)=>{
+                    if(err){
+                        req.flash('error',info.message)
+                        return next(err)
+                    }
+                    return res.redirect('/')
+                })
                 
-                return res.redirect('/')
+               
             })(req,res,next)
-        }
-
+        },
+    
     }
 }
 
@@ -74,9 +82,21 @@ function SignupController(){
     }
 }
 
+function Logoutcontroller(){
+   return{
+      logout(req,res){
+        req.logout(function(err) {
+            if (err) { return next(err); }
+            return res.redirect('/');
+          });
+      }
+   }
+}
 
 
 
 module.exports={
     SigninController,
-    SignupController}
+    SignupController,
+    Logoutcontroller,
+}
