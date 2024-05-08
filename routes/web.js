@@ -1,5 +1,6 @@
 const HomeController=require('../controllers/homeController')
-const {SignupController,SigninController, Logoutcontroller}=require('../controllers/AuthController')
+const {SignupController,SigninController, Logoutcontroller }=require('../controllers/AuthController')
+const ordercontroller=require('../controllers/customer/ordercontroller')
 const CartController=require('../controllers/customer/CartController')
 const guest=require('../middleware/guest')
 function Routers(app){
@@ -18,6 +19,8 @@ function Routers(app){
      app.post('/signin',SigninController().postsignin)
 
      app.post('/logout',Logoutcontroller().logout)
+
+     app.post('/orders',ordercontroller().store)
 }
 
 module.exports=Routers;
